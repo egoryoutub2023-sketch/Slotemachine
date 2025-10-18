@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Моя Слот-Машина</title>
+    <title>Слот-Машина</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             background: linear-gradient(45deg, #1a1a2e, #16213e);
             margin: 0;
             padding: 20px;
@@ -15,7 +15,6 @@
             justify-content: center;
             align-items: center;
         }
-        
         .slot-machine {
             text-align: center;
             background: rgba(255,255,255,0.1);
@@ -27,14 +26,11 @@
             max-width: 500px;
             width: 100%;
         }
-
         h1 {
             color: gold;
             margin-bottom: 30px;
             text-shadow: 0 0 10px rgba(255,215,0,0.5);
-            font-size: 2em;
         }
-
         .slots-container {
             display: flex;
             justify-content: center;
@@ -45,7 +41,6 @@
             border-radius: 15px;
             border: 2px solid #34495e;
         }
-
         .slot {
             width: 100px;
             height: 120px;
@@ -54,15 +49,12 @@
             overflow: hidden;
             position: relative;
             border: 3px solid #bdc3c7;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
         }
-
         .reel {
             position: absolute;
             width: 100%;
             transition: transform 0.1s;
         }
-
         .symbol {
             height: 100px;
             display: flex;
@@ -71,76 +63,30 @@
             font-size: 3em;
             border-bottom: 2px solid #bdc3c7;
         }
-
-        .symbol:last-child {
-            border-bottom: none;
-        }
-
-        .controls {
-            margin: 30px 0;
-        }
-
         button {
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            background: #e74c3c;
             border: none;
-            padding: 20px 50px;
-            font-size: 1.5em;
-            font-weight: bold;
+            padding: 15px 30px;
+            font-size: 1.2em;
             color: white;
-            border-radius: 50px;
+            border-radius: 25px;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            margin: 10px;
         }
-
-        button:hover {
-            transform: scale(1.05);
-            background: linear-gradient(45deg, #ff6b6b, #e74c3c);
-        }
-
-        button:disabled {
-            background: #7f8c8d;
-            cursor: not-allowed;
-            transform: none;
-        }
-
         .result {
             color: white;
-            font-size: 1.5em;
-            margin: 20px 0;
-            font-weight: bold;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 1.2em;
+            margin: 15px 0;
         }
-
         .score {
             color: gold;
-            font-size: 1.3em;
-            font-weight: bold;
-        }
-
-        .win {
-            color: #2ecc71;
-            animation: pulse 0.5s infinite;
-        }
-
-        .lose {
-            color: #e74c3c;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            font-size: 1.1em;
         }
     </style>
 </head>
 <body>
     <div class="slot-machine">
-        <h1>🎰 СЛОТ-МАШИНА 🎰</h1>
-        
+        <h1>🎰 СЛОТ-МАШИНА</h1>
         <div class="slots-container">
             <div class="slot" id="slot1">
                 <div class="reel">
@@ -149,11 +95,8 @@
                     <div class="symbol">🍊</div>
                     <div class="symbol">🍇</div>
                     <div class="symbol">🔔</div>
-                    <div class="symbol">⭐</div>
-                    <div class="symbol">7️⃣</div>
                 </div>
             </div>
-            
             <div class="slot" id="slot2">
                 <div class="reel">
                     <div class="symbol">🍒</div>
@@ -161,11 +104,8 @@
                     <div class="symbol">🍊</div>
                     <div class="symbol">🍇</div>
                     <div class="symbol">🔔</div>
-                    <div class="symbol">⭐</div>
-                    <div class="symbol">7️⃣</div>
                 </div>
             </div>
-            
             <div class="slot" id="slot3">
                 <div class="reel">
                     <div class="symbol">🍒</div>
@@ -173,121 +113,63 @@
                     <div class="symbol">🍊</div>
                     <div class="symbol">🍇</div>
                     <div class="symbol">🔔</div>
-                    <div class="symbol">⭐</div>
-                    <div class="symbol">7️⃣</div>
                 </div>
             </div>
         </div>
-        
-        <div class="controls">
-            <button id="spinBtn" onclick="spinSlots()">🎯 КРУТИТЬ!</button>
-        </div>
-        
-        <div class="result" id="result">Нажмите кнопку для игры!</div>
-        <div class="score">Счёт: <span id="score">100</span> монет</div>
+        <button onclick="spinSlots()">КРУТИТЬ</button>
+        <div class="result" id="result">Нажмите кнопку!</div>
+        <div class="score">Счёт: <span id="score">100</span></div>
     </div>
 
     <script>
-        let isSpinning = false;
         let score = 100;
-
+        
         function spinSlots() {
-            if (isSpinning) return;
-            
-            const spinBtn = document.getElementById('spinBtn');
-            const result = document.getElementById('result');
-            const scoreElement = document.getElementById('score');
-            
             if (score < 10) {
-                result.innerHTML = '💸 Нет денег! Игра окончена!';
-                spinBtn.disabled = true;
+                document.getElementById('result').textContent = 'Нет денег!';
                 return;
             }
-            
             score -= 10;
-            scoreElement.textContent = score;
+            document.getElementById('score').textContent = score;
             
-            isSpinning = true;
-            spinBtn.disabled = true;
-            result.textContent = 'Крутим...';
-            result.className = 'result';
+            document.getElementById('result').textContent = 'Крутим...';
             
-            const symbols = ['🍒', '🍋', '🍊', '🍇', '🔔', '⭐', '7️⃣'];
+            const symbols = ['🍒', '🍋', '🍊', '🍇', '🔔'];
             const results = [];
             
-            let spinCount = 0;
-            const maxSpins = 30;
+            // Анимация вращения
+            let spins = 0;
             const spinInterval = setInterval(() => {
-                document.querySelectorAll('.slot').forEach((slot, index) => {
-                    const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+                document.querySelectorAll('.reel').forEach(reel => {
+                    reel.style.transform = `translateY(${Math.random() * -500}px)`;
+                });
+                spins++;
+                if (spins > 20) {
+                    clearInterval(spinInterval);
+                    showResult();
+                }
+            }, 100);
+            
+            function showResult() {
+                const finalResults = [];
+                document.querySelectorAll('.slot').forEach(slot => {
+                    const randomIndex = Math.floor(Math.random() * symbols.length);
                     const reel = slot.querySelector('.reel');
-                    const randomOffset = Math.floor(Math.random() * 7) * -100;
-                    reel.style.transform = `translateY(${randomOffset}px)`;
+                    reel.style.transform = `translateY(${randomIndex * -100}px)`;
+                    finalResults.push(symbols[randomIndex]);
                 });
                 
-                spinCount++;
-                
-                if (spinCount >= maxSpins) {
-                    clearInterval(spinInterval);
-                    
-                    setTimeout(() => {
-                        const finalResults = [];
-                        
-                        document.querySelectorAll('.slot').forEach((slot, index) => {
-                            const randomIndex = Math.floor(Math.random() * symbols.length);
-                            const finalSymbol = symbols[randomIndex];
-                            finalResults.push(finalSymbol);
-                            
-                            const reel = slot.querySelector('.reel');
-                            reel.style.transform = `translateY(${randomIndex * -100}px)`;
-                            reel.style.transition = 'transform 0.5s ease-out';
-                        });
-                        
-                        setTimeout(() => {
-                            checkWin(finalResults, result, spinBtn);
-                        }, 600);
-                    }, 200);
-                }
-            }, 50);
-        }
-
-        function checkWin(results, resultElement, spinBtn) {
-            isSpinning = false;
-            spinBtn.disabled = false;
-            
-            const scoreElement = document.getElementById('score');
-            
-            if (results[0] === results[1] && results[1] === results[2]) {
-                let winAmount = 0;
-                
-                if (results[0] === '7️⃣') {
-                    winAmount = 100;
-                    resultElement.innerHTML = '🎉 ДЖЕКПОТ! 3x7️⃣ +100 монет! 🎉';
-                } else if (results[0] === '⭐') {
-                    winAmount = 50;
-                    resultElement.innerHTML = '🌟 СУПЕР! 3x⭐ +50 монет! 🌟';
+                // Проверка выигрыша
+                if (finalResults[0] === finalResults[1] && finalResults[1] === finalResults[2]) {
+                    score += 30;
+                    document.getElementById('result').textContent = 'Выигрыш! +30';
+                } else if (finalResults[0] === finalResults[1] || finalResults[1] === finalResults[2]) {
+                    score += 15;
+                    document.getElementById('result').textContent = 'Удача! +15';
                 } else {
-                    winAmount = 30;
-                    resultElement.innerHTML = `🎊 ВЫИГРЫШ! 3x${results[0]} +30 монет! 🎊`;
+                    document.getElementById('result').textContent = 'Повезёт в следующий раз!';
                 }
-                
-                score += winAmount;
-                resultElement.className = 'result win';
-                
-            } else if (results[0] === results[1] || results[1] === results[2] || results[0] === results[2]) {
-                score += 15;
-                resultElement.innerHTML = '👍 ХОРОШО! 2 одинаковых +15 монет!';
-                resultElement.className = 'result win';
-            } else {
-                resultElement.innerHTML = '😢 Попробуйте ещё раз!';
-                resultElement.className = 'result lose';
-            }
-            
-            scoreElement.textContent = score;
-            
-            if (score < 10) {
-                resultElement.innerHTML = '💸 Деньги закончились! Обновите страницу для новой игры!';
-                spinBtn.disabled = true;
+                document.getElementById('score').textContent = score;
             }
         }
     </script>
